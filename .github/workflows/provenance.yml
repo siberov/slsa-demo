@@ -20,15 +20,10 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          path: target/slsademo*.jar
-          name: jarfile
       - name: Generate provenance
         uses: slsa-framework/github-actions-demo@v0.1
         with:
-          artifact_path: jarfile
+          artifact_path: target/*.jar
       - name: Upload provenance
         uses: actions/upload-artifact@v2
         with:

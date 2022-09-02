@@ -24,21 +24,14 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           path: target/slsademo*.jar
-
-  generate-provenance:
-    needs: build
-    name: Generate build provenance
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@v2
-
+          name: jarfile
       - name: Generate provenance
         uses: slsa-framework/github-actions-demo@v0.1
         with:
-          artifact_path: artifact/
-
+          artifact_path: jarfile
       - name: Upload provenance
         uses: actions/upload-artifact@v2
         with:
+          name: my-artifact
           path: build.provenance
+

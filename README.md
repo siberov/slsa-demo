@@ -37,10 +37,16 @@ Detailed requirements:
 
 Same as 1, plus:
 
+### Source
+
+- [Version controlled](https://slsa.dev/spec/v0.1/requirements#version-controlled)
+
 ### Build
+
 - [Build service](https://slsa.dev/spec/v0.1/requirements#build-service)
 
 ### Provenance
+
 - [Authenticated](https://slsa.dev/spec/v0.1/requirements#authenticated) - The
   provenance is signed by the build service in a way that allows the consumer to
   verify that it has not been tampered with.
@@ -51,4 +57,39 @@ Same as 1, plus:
 Demo: Create a new tag, e.g., `git tag -a v0.2.0 -m "v0.2.0"` and push it to
 GitHub. Then you can download the provenance file and verify it using the
 signature like so: `gpg --verify build.provenance.asc build.provenance`.
+
+## Level 3
+
+> **The source and build platforms meet specific standards to guarantee the
+> auditability of the source and the integrity of the provenance respectively.**
+> We envision an accreditation process whereby auditors certify that platforms
+> meet the requirements, which consumers can then rely on. SLSA 3 provides much
+> stronger protections against tampering than earlier levels by preventing
+> specific classes of threats, such as cross-build contamination.
+
+Detailed requirements:
+
+Same as 2, plus:
+
+### Source
+
+- [Retained for 18 months](https://slsa.dev/spec/v0.1/requirements#retained-indefinitely)
+
+### Build
+
+- [Build as code](https://slsa.dev/spec/v0.1/requirements#build-as-code)
+    - For instance, a build.yaml file specifying the build process. Must be
+      verifyably derived from a version controlled document.
+- [Ephemeral environment](https://slsa.dev/spec/v0.1/requirements#ephemeral-environment)
+    - The build is ran in a stateless environment, e.g., a docker container.
+- [Isolated](https://slsa.dev/spec/v0.1/requirements#isolated)
+    - Build instances must not affect each other.
+    - Build containers must not access to secrets.
+    - Etc (see link)
+
+### Provenance
+
+- [Non-falsifiable](https://slsa.dev/spec/v0.1/requirements#non-falsifiable)
+    - Higher demands on how the secret keys are stored, mainly.
+
 

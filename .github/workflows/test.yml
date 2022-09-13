@@ -30,7 +30,7 @@ jobs:
         output_path: target/build.provenance
     - name: Sign provenance
       run: |
-        gpg --clearsign --output target/build.provenance target/build.provenance
+        gpg --no-tty --clearsign --output target/build.provenance target/build.provenance
     - name: Create Release
       uses: svenstaro/upload-release-action@v2
       with:

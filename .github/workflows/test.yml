@@ -13,8 +13,8 @@ jobs:
       id: import_gpg
       uses: crazy-max/ghaction-import-gpg@v5
       with:
-        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-        passphrase: ${{ secrets.GPG_PASSPHRASE }}
+        gpg_private_key: ${{ slsademo.GPG_PRIVATE_KEY }}
+        passphrase: ${{ slsademo.GPG_PASSPHRASE }}
     - name: Set up JDK 11
       uses: actions/setup-java@v3
       with:

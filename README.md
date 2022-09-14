@@ -73,13 +73,14 @@ Same as 2, plus:
 
 ### Source
 
+- [Verified history](https://slsa.dev/spec/v0.1/requirements#verified-history)
 - [Retained for 18 months](https://slsa.dev/spec/v0.1/requirements#retained-indefinitely)
 
 ### Build
 
 - [Build as code](https://slsa.dev/spec/v0.1/requirements#build-as-code)
     - For instance, a build.yaml file specifying the build process. Must be
-      verifyably derived from a version controlled document.
+      verifiably derived from a version controlled document.
 - [Ephemeral environment](https://slsa.dev/spec/v0.1/requirements#ephemeral-environment)
     - The build is ran in a stateless environment, e.g., a docker container.
 - [Isolated](https://slsa.dev/spec/v0.1/requirements#isolated)
@@ -92,4 +93,45 @@ Same as 2, plus:
 - [Non-falsifiable](https://slsa.dev/spec/v0.1/requirements#non-falsifiable)
     - Higher demands on how the secret keys are stored, mainly.
 
+## Level 4
+
+> **Requires two-person review of all changes and a hermetic, reproducible build
+> process.** Two-person review is an industry best practice for catching
+> mistakes and deterring bad behavior. Hermetic builds guarantee that the
+> provenance’s list of dependencies is complete. Reproducible builds, though not
+> strictly required, provide many auditability and reliability benefits.
+> Overall, SLSA 4 gives the consumer a high degree of confidence that the
+> software has not been tampered with.
+
+Detailed requirements:
+
+Same as 3, plus:
+
+### Source
+
+- [Retained indefinitely](https://slsa.dev/spec/v0.1/requirements#retained-indefinitely)
+- [Two-person reviewed](https://slsa.dev/spec/v0.1/requirements#two-person-reviewed)
+
+### Build
+
+- [Parameterless](https://slsa.dev/spec/v0.1/requirements#parameterless)
+- [Hermetic](https://slsa.dev/spec/v0.1/requirements#hermetic)
+    - Dependencies, etc, are described with [_immutable references_](https://slsa.dev/spec/v0.1/requirements#immutable-reference).
+- [Reproducible*](https://slsa.dev/spec/v0.1/requirements#reproducible)
+    - Except if you have a good reason.
+
+### Provenance
+
+- [Dependencies complete](https://slsa.dev/spec/v0.1/requirements#dependencies-complete)
+    - Records all build dependencies, as well as state of build environment.
+
+### Common
+
+- [Security](https://slsa.dev/spec/v0.1/requirements#security)
+    - General security requirements of the entire system. Undefined as of now.
+- [Access](https://slsa.dev/spec/v0.1/requirements#access)
+    - Also poorly defined.
+- [Superusers](https://slsa.dev/spec/v0.1/requirements#superusers)
+    - Admins may override all guarantees of SLSA, as long as they don't do it
+      often?
 

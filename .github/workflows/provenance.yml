@@ -24,9 +24,9 @@ jobs:
 
     - name: Push provenance to remote
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TOKEN: ${{ secrets.PAT }}
       run: |
-        git clone https://siberov:$GITHUB_TOKEN@github.com/siberov/action-store
+        git clone https://siberov:$TOKENgithub.com/siberov/action-store
         cd action-store
         git config --unset-all http.https://github.com/.extraheader
         git config user.name "provenance-bot"

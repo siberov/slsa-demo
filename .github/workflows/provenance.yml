@@ -26,16 +26,18 @@ jobs:
       env:
         TOKEN: ${{ secrets.PAT }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        URL: https://${{secrets.PAT}}@github.com/siberov/action-store
       run: |
         git config --global user.name "provenance-bot"
         git config --global user.email "dummy@email.com"
         git config --global credential.helper cache
         git config --unset-all http.https://github.com/.extraheader
-        git clone https://${{secrets.PAT}}@github.com/siberov/action-store
+        git clone ${{URL}}
         cp target/build.provenance action-store
         cd action-store
         git add build.provenance
         git commit -m "$GITHUB_SHA"
+        git remote set-url origin ${{URL}}
         git push
 
 #    - name: Create Release

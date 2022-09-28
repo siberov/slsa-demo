@@ -35,7 +35,7 @@ jobs:
         cp target/build.provenance action-store
         cd action-store
         git add build.provenance
-        git commit -m "$COMMIT"
+        git commit -m "$GITHUB_SHA"
         git push
 
 #    - name: Create Release

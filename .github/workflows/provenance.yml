@@ -31,6 +31,7 @@ jobs:
       run: |
         git config --global user.name "provenance-bot"
         git config --global user.email "dummy@email.com"
+        git config --unset-all http.https://github.com/.extraheader
         git clone $URL
         echo "Cloned!"
         cp target/build.provenance action-store
@@ -40,6 +41,7 @@ jobs:
         git add build.provenance
         git commit -m "$GITHUB_SHA"
         echo "Committed"
+        git remote set-url origin $URL
         git push
 
 #    - name: Create Release

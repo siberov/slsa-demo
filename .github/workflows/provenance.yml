@@ -1,9 +1,6 @@
 name: Create a Release with signed SLSA Provenance
 
-on:
-  create:
-    tags:
-      - v*
+on: push
 
 jobs:
   build:
@@ -24,21 +21,25 @@ jobs:
       with:
         artifact_path: target
         output_path: target/build.provenance
-    - name: Import GPG key
-      id: import_gpg
-      uses: crazy-max/ghaction-import-gpg@v5
-      with:
-        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-        passphrase: ${{ secrets.GPG_PASSPHRASE }}
-    - name: Sign provenance
-      run: |
-        gpg --batch --armor --output target/build.provenance.asc --detach-sig target/build.provenance
-    - name: Create Release
-      uses: svenstaro/upload-release-action@v2
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: target/*
-        file_glob: true
-        tag: ${{ github.ref }}
-        overwrite: true
 
+    - name: Push provenance to remote
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git clone https://user:$GITHUB_TOKEN@github.com/asiberov/action-store
+        cd action-store
+        git config --unset-all http.https://github.com/.extraheader
+        git config user.name "provenance-bot"
+        git config user.email "dummy@email.com"
+        cp target/build.provenance .
+        git commit build.provenance -m "$COMMIT"
+        git push
+
+#    - name: Create Release
+#      uses: svenstaro/upload-release-action@v2
+#      with:
+#        repo_token: ${{ secrets.GITHUB_TOKEN }}
+#        file: target/*
+#        file_glob: true
+#        tag: ${{ github.ref }}
+#        overwrite: true

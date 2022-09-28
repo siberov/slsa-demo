@@ -32,8 +32,8 @@ jobs:
         git config --global credential.helper cache
         git config --unset-all http.https://github.com/.extraheader
         git clone https://${{secrets.PAT}}@github.com/siberov/action-store
+        cp target/build.provenance action-store
         cd action-store
-        cp target/build.provenance .
         git add build.provenance
         git commit -m "$COMMIT"
         git push

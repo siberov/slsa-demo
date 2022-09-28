@@ -27,11 +27,12 @@ jobs:
         TOKEN: ${{ secrets.PAT }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        git clone https://github.com/siberov/action-store
-        cd action-store
+        git config --global user.name "provenance-bot"
+        git config --global user.email "dummy@email.com"
+        git config --global credential.helper cache
         git config --unset-all http.https://github.com/.extraheader
-        git config user.name "provenance-bot"
-        git config user.email "dummy@email.com"
+        git clone https://${{secrets.PAT}}@github.com/siberov/action-store
+        cd action-store
         cp target/build.provenance .
         git add build.provenance
         git commit -m "$COMMIT"

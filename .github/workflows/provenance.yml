@@ -41,7 +41,7 @@ jobs:
         git add build.provenance
         git commit -m "$GITHUB_SHA"
         echo "Committed"
-        git push
+        git push $URL
 
 #    - name: Create Release
 #      uses: svenstaro/upload-release-action@v2

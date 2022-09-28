@@ -32,7 +32,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         # Target repo to upload provenence file 
         URL: https://siberov:${{secrets.PAT}}@github.com/siberov/action-store
-      run: |
+    - run: |
         git config --global user.name 'action bot'
         git config --global user.email 'siberov@users.noreply.github.com'
         git commit -am "Automated report"

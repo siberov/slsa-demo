@@ -26,7 +26,7 @@ jobs:
       env:
         TOKEN: ${{ secrets.PAT }}
       run: |
-        git clone https://siberov:$TOKENgithub.com/siberov/action-store
+        git clone https://siberov:$TOKEN@github.com/siberov/action-store
         cd action-store
         git config --unset-all http.https://github.com/.extraheader
         git config user.name "provenance-bot"

@@ -32,7 +32,7 @@ jobs:
         git config --unset-all http.https://github.com/.extraheader
         git clone $URL
         echo "Cloned!"
-        cp target/build.provenance action-store
+        cp build.provenance action-store
         echo "Copied build.provenance into action-store"
         cd action-store
         echo "Changed directory to action-store"

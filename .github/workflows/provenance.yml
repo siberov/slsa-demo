@@ -20,7 +20,7 @@ jobs:
       uses: slsa-framework/github-actions-demo@v0.1
       with:
         artifact_path: target
-        output_path: /build.provenance
+        output_path: build.provenance
         src_branch: store
         dst_branch: main
         commit_message: Provenance for ${{ github.sha }}
@@ -28,7 +28,7 @@ jobs:
       uses: andstor/copycat-action@v3
       with:
         personal_token: ${{ secrets.PAT }}
-        src_path: /build.provenance
+        src_path: .
         dst_owner: siberov
         dst_repo_name: action-store
         src_branch: main

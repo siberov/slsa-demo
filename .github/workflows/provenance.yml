@@ -20,30 +20,16 @@ jobs:
       uses: slsa-framework/github-actions-demo@v0.1
       with:
         artifact_path: target
-        output_path: $GITHUB_WORKSPACE/build.provenance
-
+        output_path: build.provenance
+        src_branch: store
+        dst_branch: main
+        commit_message: Provenance for ${{ GITHUB_SHA }}
     - name: Push provenance to remote
-      uses: actions/checkout@v3
+      uses: andstor/copycat-action@v3
       with:
-        repository: siberov/action-store
-        token: ${{ secrets.PAT }}
-      env:
-        TOKEN: ${{ secrets.PAT }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # Target repo to upload provenence file 
-        URL: https://siberov:${{secrets.PAT}}@github.com/siberov/action-store
-    - run: |
-        git config --global user.name 'action bot'
-        git config --global user.email 'siberov@users.noreply.github.com'
-        git commit -am "Automated report"
-        git push
-
-
-#    - name: Create Release
-#      uses: svenstaro/upload-release-action@v2
-#      with:
-#        repo_token: ${{ secrets.GITHUB_TOKEN }}
-#        file: target/*
-#        file_glob: true
-#        tag: ${{ github.ref }}
-#        overwrite: true
+        personal_token: ${{ secrets.PAT }}
+        src_path: build.provenance
+        dst_owner: siberov
+        dst_repo_name: action-store
+        src_branch: main
+        dst_branch: main

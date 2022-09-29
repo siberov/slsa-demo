@@ -21,15 +21,13 @@ jobs:
       with:
         artifact_path: target
         output_path: build.provenance
-        src_branch: store
-        dst_branch: main
-        commit_message: Provenance for ${{ github.sha }}
     - name: Push provenance to remote
       uses: andstor/copycat-action@v3
       with:
         personal_token: ${{ secrets.PAT }}
-        src_path: .
+        src_path: ..
         dst_owner: siberov
         dst_repo_name: action-store
-        src_branch: main
+        src_branch: store
         dst_branch: main
+        commit_message: Provenance for ${{ github.sha }}

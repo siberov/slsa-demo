@@ -29,6 +29,7 @@ jobs:
         ssh-add - <<< "${{ secrets.PRIVATE_SSH_DEPLOY }}"
     - name: Push provenance to remote
       env:
+        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         TOKEN: ${{ secrets.PAT }}
         # Target repo to upload provenence file 
         URL: https://github.com/siberov/action-store

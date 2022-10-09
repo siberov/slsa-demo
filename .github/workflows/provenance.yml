@@ -38,6 +38,6 @@ jobs:
         git clone $URL
         cp build.provenance action-store/${{ github.sha }}.provenance
         cd action-store
-        git add build.provenance
+        git add ${{ github.sha }}.provenance
         git commit -m "${{ github.sha }}"
         git push

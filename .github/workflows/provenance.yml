@@ -36,7 +36,7 @@ jobs:
         git config --global user.name "provenance-bot"
         git config --global user.email "arvidsiberov+bot@outlook.com"
         git clone $URL
-        cp build.provenance action-store
+        cp build.provenance action-store/${{ github.sha }}.provenance
         cd action-store
         git add build.provenance
         git commit -m "${{ github.sha }}"

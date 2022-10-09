@@ -30,9 +30,8 @@ jobs:
     - name: Push provenance to remote
       env:
         SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-        TOKEN: ${{ secrets.PAT }}
         # Target repo to upload provenence file 
-        URL: https://github.com/siberov/action-store
+        URL: git@github.com:siberov/action-store.git
       run: |
         git config --global user.name "provenance-bot"
         git config --global user.email "arvidsiberov+bot@outlook.com"

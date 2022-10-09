@@ -22,8 +22,11 @@ jobs:
         artifact_path: target
         output_path: build.provenance
     - name: Add SSH private key to agent
+      env:
+        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       run: |
-          ssh-add - <<< "${{ secrets.PRIVATE_SSH_DEPLOY }}"
+        ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+        ssh-add - <<< "${{ secrets.PRIVATE_SSH_DEPLOY }}"
     - name: Push provenance to remote
       env:
         TOKEN: ${{ secrets.PAT }}
